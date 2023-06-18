@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <section class="relative h-screen overflow-hidden font-mono bg-white dark:bg-gray-800">
+    <section class="relative font-mono bg-white dark:bg-gray-800">
         <div class="relative z-20 flex items-center">
             <div class="container relative flex flex-col items-center justify-between px-6 py-4 mx-auto">
                 <div class="flex flex-col">
@@ -11,17 +11,18 @@
                         {{ $page->description }}
                     </h2>
                     <div class="flex items-center justify-center mt-4">
-                        <div class="flex mt-8">
+                        <form class="flex my-8" method="POST" action="{{ route('clients.save') }}">
+                            @csrf
                             <div class="mr-4 text-white uppercase bg-pink-500 border-1 rounded-lg text-md">
-                                <input type="text" id="rounded-email"
-                                       class="rounded-lg flex-1 appearance-none w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                       placeholder="+7(999)999-99-99"/>
+                                <x-text-input id="phone" class="rounded-lg flex-1 appearance-none w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" name="phone" :value="old('email')"
+                                              required autofocus autocomplete="phone" placeholder="+7(999)999-99-99"/>
+                                <x-input-error :messages="$errors->get('phone')" class="mt-2"/>
                             </div>
-                            <a href="#"
-                               class="px-4 py-2 text-pink-500 uppercase bg-transparent border-2 border-pink-500 rounded-lg dark:text-white hover:bg-pink-500 hover:text-white text-md">
+                            <button type="submit"
+                                    class="px-4 py-2 text-pink-500 uppercase bg-transparent border-2 border-pink-500 rounded-lg dark:text-white hover:bg-pink-500 hover:text-white text-md">
                                 {{ __('Call me back') }}
-                            </a>
-                        </div>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

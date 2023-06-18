@@ -26,9 +26,9 @@ Route::get('/about', \App\Http\Controllers\AboutUsController::class)->name('abou
 
 Route::get('/contacts', \App\Http\Controllers\ContactController::class)->name('contacts');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('/clients/save', [\App\Http\Controllers\ClientController::class, 'save'])->name('clients.save');
+
+Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
